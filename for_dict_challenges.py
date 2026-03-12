@@ -12,7 +12,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+counts = {}
+for student in students:
+    name = student['first_name']
+    if name in counts:
+        counts[name] += 1
+    else:
+        counts[name] = 1
+for name, count in counts.items():
+    print(f'{name}: {count}')
+
 
 
 # Задание 2
@@ -26,7 +35,18 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+counts = {}
+for student in students:
+    name = student['first_name']
+    if name in counts:
+        counts[name] +=1
+    else:
+        counts[name] = 1
+max_count = max (counts.values())
+
+for name, count in counts.items():
+    if count == max_count:
+        print(f'Самое частое имя среди учеников: {name}')
 
 
 # Задание 3
