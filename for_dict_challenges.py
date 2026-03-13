@@ -105,7 +105,16 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+for school_class in school:
+    male = 0
+    female = 0
+    for student in school_class['students']:
+        name = student['first_name']
+        if is_male[name]:
+            male +=1
+        else:
+            female +=1        
+    print(f'Класс {school_class['class']}: девочки {female}, мальчики {male}')
 
 
 # Задание 5
@@ -124,5 +133,35 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+
+
+max_male_count = 0
+max_female_count = 0
+max_male_class = {}
+max_female_class = {}
+
+for school_class in school:
+    male = 0
+    female = 0
+    for student in school_class['students']:
+        name = student['first_name']
+        if is_male[name]:
+            male += 1
+        else:
+            female += 1
+    if male > female:
+        school_class['sex'] = 'male'
+        school_class['quantity'] = male
+        if male > max_male_count:
+            max_male_count = male
+            max_male_class = school_class
+    else:
+        school_class['sex'] = 'female'
+        school_class['quantity'] = female
+        if female > max_female_count:
+            max_female_count = female
+            max_female_class = school_class
+
+print(f'Больше всего мальчиков в классе {max_male_class['class']}')
+print(f'Больше всего девочек в классе {max_female_class['class']}')
 
