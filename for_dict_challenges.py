@@ -12,14 +12,14 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-counts = {}
+name_counts = {}
 for student in students:
     name = student['first_name']
-    if name in counts:
-        counts[name] += 1
+    if name in name_counts:
+        name_counts[name] += 1
     else:
-        counts[name] = 1
-for name, count in counts.items():
+        name_counts[name] = 1
+for name, count in name_counts.items():
     print(f'{name}: {count}')
 
 
@@ -35,16 +35,16 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-counts = {}
+name_counts = {}
 for student in students:
     name = student['first_name']
-    if name in counts:
-        counts[name] +=1
+    if name in name_counts:
+        name_counts[name] +=1
     else:
-        counts[name] = 1
-max_count = max (counts.values())
+        name_counts[name] = 1
+max_count = max (name_counts.values())
 
-for name, count in counts.items():
+for name, count in name_counts.items():
     if count == max_count:
         print(f'Самое частое имя среди учеников: {name}')
 
@@ -71,8 +71,21 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
-
+school_class_count = 0
+for school_class in school_students:
+    school_class_count += 1
+    name_counts = {}
+    for student in school_class:        
+        name = student['first_name']        
+        if name in name_counts:
+            name_counts[name] += 1
+        else:
+            name_counts[name] = 1
+    max_count = max (name_counts.values())
+    for name, count in name_counts.items():
+        if count == max_count:
+            print(f'Самое частое имя в классе {school_class_count}: {name}')
+    
 
 # Задание 4
 # Для каждого класса нужно вывести количество девочек и мальчиков в нём.
