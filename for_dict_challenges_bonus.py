@@ -90,12 +90,29 @@ def most_replied_user_id(messages):
         else:
             reply_counts[message_reply_for] += 1
 
-    print(reply_counts)
-    return max(reply_counts, key=reply_counts.get)  
+    if None in reply_counts:
+        del reply_counts[None]
+    
+    if not reply_counts:
+        return None
+
+    most_reply_message = max(reply_counts, key=reply_counts.get)
+    for message in messages:
+        if message['id'] == most_reply_message:
+            return message['sent_by']  
 
 # 3. Вывести айди пользователей, сообщения которых видело больше всего уникальных пользователей.
 def most_viewed_user_ids(messages):
-    pass    
+    viewed_counts = {}
+    for message in messages:
+        sender = message['sent_by']
+        seen_by_str = message['seen_by']
+        seen_users = seen_by_str.split()
+        view_count = len(seen_users)
+        viewed_counts[sender] = view_count
+    print(viewed_counts)
+    most_viewed = max(viewed_counts, key=viewed_counts.get)
+    return (most_viewed)
 
 # 4. Определить, когда в чате больше всего сообщений: утром (до 12 часов), днём (12-18 часов) или вечером (после 18 часов).
 def peak_time_of_day(messages):
@@ -113,8 +130,8 @@ if __name__ == "__main__":
     print('\n')
     print("2. Идентификатор пользователя, на сообщения которого больше всего отвечали:", most_replied_user_id(chat_messages))
     print('\n')
-    print("3. Идентификатор пользователей, сообщения которых видело больше всего уникальных пользователей:", most_active_user_id(chat_messages))
+    print("3. Идентификатор пользователей, сообщения которых видело больше всего уникальных пользователей:", most_viewed_user_ids(chat_messages))
     print('\n')
-    print("4. В чате больше всего сообщений:", most_active_user_id(chat_messages))
+    print("4. В чате больше всего сообщений:", peak_time_of_day(chat_messages))
     print('\n')
-    print("5. Идентификатор сообщения, которое стало началом для самого длинного треда", most_active_user_id(chat_messages))
+    print("5. Идентификатор сообщения, которое стало началом для самого длинного треда", longest_thread_starter_ids(chat_messages))
